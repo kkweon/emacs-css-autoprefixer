@@ -1,4 +1,5 @@
 * css-autoprefixer for Emacs
+[[https://travis-ci.org/kkweon/emacs-css-autoprefixer.svg?branch=master]]
 
 Generates vendor autoprefixes for your CSS files
 
