@@ -1,4 +1,4 @@
-* CSS Autoprefixer for Emacs
+* css-autoprefixer for Emacs
 
 Generates vendor autoprefixes for your CSS files
 
@@ -29,8 +29,13 @@ converted to
 #+END_SRC
 
 
+* Installation
 ** Dependencies
 
 #+BEGIN_SRC bash
 npm install -g postcss-cli autoprefixer
 #+END_SRC
+
+** FROM MELPA
+
+Install the package =css-autoprefixer=

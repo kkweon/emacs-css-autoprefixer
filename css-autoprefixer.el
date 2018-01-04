@@ -1,30 +1,25 @@
-;;; css-autoprefixer.el --- -*- lexical-binding: t; -*-
+;;; css-autoprefixer.el --- Adds autoprefix to CSS -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018 Kyung Mo Kweon
 ;;
 ;; Author: Kyung Mo Kweon<kkweon@gmail.com> and contributors
 ;; URL: https://github.com/kkweon/emacs-css-autoprefixer
 ;; Package-Requires: ((emacs "24"))
-;; Version: 3.0
-;; Keywords: convenience, usability
+;; Version: 1.0
+;; Keywords: convenience, usability, css
 
 ;; This file is not part of GNU Emacs.
-
-;;; License: MIT
-
 ;; Licensed under the same terms as Emacs.
-
-;;; Commentary:
-
-;; Quick start:
-;; css-autoprefixer
 ;;
-;; Bind the following commands:
-;; smex, smex-major-mode-commands
+;;; Commentary:
+;;
+;; Quick start:
+;; (require 'css-autoprefixer)
+;; css-autoprefixer
 ;;
 ;; For a detailed introduction see:
 ;; https://github.com/kkweon/emacs-css-autoprefixer/README.org
-
+;;
 ;;; Code:
 
 ;;;###autoload
@@ -61,3 +56,4 @@
   (css-autoprefixer--trim-first-and-last (shell-command-to-string (css-autoprefixer--build-npx-command filename))))
 
 (provide 'css-autoprefixer)
+;;; css-autoprefixer.el ends here
