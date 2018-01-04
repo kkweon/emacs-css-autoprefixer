@@ -49,8 +49,8 @@
 
 (defun css-autoprefixer--trim-first-and-last (message)
   "Delete first line and last line of MESSAGE."
-  (s-join "\n"
-          (nbutlast (cdr (s-split "\n" message)))))
+  (mapconcat 'identity (nbutlast (cdr (split-string message "\n")))
+               "\n"))
 
 (defun css-autoprefixer--execute-npx (filename)
   "Execute Autoprefix on FILENAME."

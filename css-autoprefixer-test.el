@@ -21,5 +21,4 @@
 }" (css-autoprefixer--execute-npx temp-file)))
     (delete-file temp-file)))
 
-
 ;;; css-autoprefixer-test.el ends here
