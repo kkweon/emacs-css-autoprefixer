@@ -1,4 +1,4 @@
-;;; autoprefixer.el --- -*- lexical-binding: t; -*-
+;;; css-autoprefixer.el --- -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018 Kyung Mo Kweon
 ;;
