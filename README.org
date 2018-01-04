@@ -1,0 +1,36 @@
+* CSS Autoprefixer for Emacs
+
+Generates vendor autoprefixes for your CSS files
+
+#+BEGIN_SRC css
+  a {
+    display: flex;
+  }
+
+  p {
+    display: flex;
+  }
+#+END_SRC
+
+converted to
+
+#+BEGIN_SRC css
+  a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  p {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+#+END_SRC
+
+
+** Dependencies
+
+#+BEGIN_SRC bash
+npm install -g postcss-cli autoprefixer
+#+END_SRC
