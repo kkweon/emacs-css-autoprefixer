@@ -24,7 +24,7 @@
 
 ;;;###autoload
 (defun css-autoprefixer ()
-  "Add autoprefix in the current buffer"
+  "Add autoprefix in the current buffer."
   (interactive)
   (save-excursion
     (let* ((temp-name (make-temp-file "css-prefixer" nil ".css"))
@@ -42,17 +42,18 @@
         (insert (css-autoprefixer--execute-npx temp-name))))))
 
 (defun css-autoprefixer--build-npx-command (filename)
+  "Return npx postcss shell command for the given FILENAME."
   (concat "npx postcss "
           (expand-file-name filename)
           " --use autoprefixer"))
 
 (defun css-autoprefixer--trim-first-and-last (message)
-  "Delete first line and last line of MESSAGE"
+  "Delete first line and last line of MESSAGE."
   (s-join "\n"
           (nbutlast (cdr (s-split "\n" message)))))
 
 (defun css-autoprefixer--execute-npx (filename)
-  "Execute Autoprefix on FILENAME"
+  "Execute Autoprefix on FILENAME."
   (css-autoprefixer--trim-first-and-last (shell-command-to-string (css-autoprefixer--build-npx-command filename))))
 
 (provide 'css-autoprefixer)
