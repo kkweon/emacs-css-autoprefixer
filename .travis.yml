@@ -134,7 +134,7 @@ before_script:
         make downloads;
     fi
 
-  - npm install -g npx postcss-cli autoprefixer
+  - make npm
 
 ###
 ### the actual build/test command

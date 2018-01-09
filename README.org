@@ -34,7 +34,7 @@ converted to
 ** Dependencies
 
 #+BEGIN_SRC bash
-npm install -g postcss-cli autoprefixer
+npm install -g npx postcss-cli autoprefixer
 #+END_SRC
 
 ** FROM MELPA

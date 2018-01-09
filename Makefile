@@ -24,6 +24,9 @@ build :
 	      (setq byte-compile-error-on-warn t)  \
 	      (batch-byte-compile))" css-autoprefixer.el
 
+npm:
+	npm install --global npx postcss-cli autoprefixer
+
 test-dep-1 :
 	@cd $(TEST_DIR)                                      && \
 	$(EMACS) $(EMACS_BATCH)  -L . -L .. -l $(TEST_DEP_1) || \
