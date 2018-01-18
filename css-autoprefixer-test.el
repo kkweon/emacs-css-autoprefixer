@@ -5,20 +5,34 @@
 
 (ert-deftest autoprefixer-remove-first-and-last-line
     ()
+  "Test if it can get rid of the first and the last line"
   (should (equal "middleline" (css-autoprefixer--trim-first-and-last "first\nmiddleline\nlastline"))))
 
-(ert-deftest autoprefixer--build-npx-command
+(ert-deftest autoprefixer--execute-npx
     ()
+  "Test if the autoprefxier works"
   (let ((temp-file "temp.css"))
     (with-temp-file temp-file
       (insert "a {
   display: flex;
 }"))
-    (should (equal "a {
+    (let* ((result (css-autoprefixer--execute-npx temp-file))
+           (code (car result))
+           (content (car (cdr result))))
+      (should (equal 0 code))
+      (should (equal "a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-}" (css-autoprefixer--execute-npx temp-file)))
+}" (css-autoprefixer--trim-first-and-last content))))
     (delete-file temp-file)))
+
+(ert-deftest autoprefixer--test-fail
+    ()
+  "When the autoprefixer fail, nothing should change"
+  (with-temp-buffer
+    (insert "this is wrong css syntax so it wil fail")
+    (css-autoprefixer)
+    (should (equal (buffer-string) "this is wrong css syntax so it wil fail"))))
 
 ;;; css-autoprefixer-test.el ends here

@@ -24,7 +24,7 @@
 
 ;;;###autoload
 (defun css-autoprefixer ()
-  "Add autoprefix in the current buffer."
+  "Run autoprefix in the current buffer. If error, display error messages"
   (interactive)
   (save-excursion
     (let* ((temp-name (make-temp-file "css-prefixer" nil ".css"))
@@ -34,27 +34,42 @@
                        (buffer-string))))
       (with-temp-file temp-name
         (insert temp-css))
-      (progn
-        (if (region-active-p)
-            (delete-region (region-beginning)
-                           (region-end))
-          (erase-buffer))
-        (insert (css-autoprefixer--execute-npx temp-name))))))
+      (let* ((result (css-autoprefixer--execute-npx temp-name))
+             (success-p (= (car result) 0))
+             (content (car (cdr result))))
+        (if success-p
+            (progn
+              (css-autoprefixer-clean-buffer)
+              (insert (css-autoprefixer--trim-first-and-last content)))
+          (display-message-or-buffer content))))))
 
-(defun css-autoprefixer--build-npx-command (filename)
-  "Return npx postcss shell command for the given FILENAME."
-  (concat "npx postcss "
-          (expand-file-name filename)
-          " --use autoprefixer"))
 
-(defun css-autoprefixer--trim-first-and-last (message)
-  "Delete first line and last line of MESSAGE."
-  (mapconcat 'identity (nbutlast (cdr (split-string message "\n")))
-               "\n"))
+(defun css-autoprefixer-clean-buffer ()
+  "Clear current selection or whole buffer"
+  (if (region-active-p)
+      (delete-region (region-beginning)
+                     (region-end))
+    (erase-buffer)))
 
 (defun css-autoprefixer--execute-npx (filename)
-  "Execute Autoprefix on FILENAME."
-  (css-autoprefixer--trim-first-and-last (shell-command-to-string (css-autoprefixer--build-npx-command filename))))
+  "Run autoprefix shell command for the given FILENAME. Return a list (EXITCODE, OUTPUT)"
+  (with-temp-buffer
+    (list (call-process "npx"
+                        nil
+                        (list (current-buffer)
+                              t)
+                        0
+                        "postcss"
+                        (shell-quote-argument (expand-file-name filename))
+                        "--use"
+                        "autoprefixer")
+          (buffer-string))))
+
+(defun css-autoprefixer--trim-first-and-last (message)
+  "Delete first line and last line of MESSAGE because the first line is success message and the last message is useless message"
+  (mapconcat 'identity
+             (nbutlast (cdr (split-string message "\n")))
+             "\n"))
 
 (provide 'css-autoprefixer)
 ;;; css-autoprefixer.el ends here
