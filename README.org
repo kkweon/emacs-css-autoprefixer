@@ -1,5 +1,6 @@
 * css-autoprefixer for Emacs
-[[https://travis-ci.org/kkweon/emacs-css-autoprefixer.svg?branch=master]]
+[[https://travis-ci.org/kkweon/emacs-css-autoprefixer.svg?branch=master]] [[https://melpa.org/#/css-autoprefixer][file:https://melpa.org/packages/css-autoprefixer-badge.svg]]
+
 
 Generates vendor autoprefixes for your CSS files
 
