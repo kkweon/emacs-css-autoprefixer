@@ -40,7 +40,7 @@
         (if success-p
             (progn
               (css-autoprefixer-clean-buffer)
-              (insert (css-autoprefixer--trim-first-and-last content)))
+              (insert (css-autoprefixer--trim-last content)))
           (display-message-or-buffer content))))))
 
 
@@ -65,10 +65,10 @@
                         "autoprefixer")
           (buffer-string))))
 
-(defun css-autoprefixer--trim-first-and-last (message)
+(defun css-autoprefixer--trim-last (message)
   "Delete first line and last line of MESSAGE because the first line is success message and the last message is useless message"
   (mapconcat 'identity
-             (nbutlast (cdr (split-string message "\n")))
+             (nbutlast (split-string message "\n"))
              "\n"))
 
 (provide 'css-autoprefixer)

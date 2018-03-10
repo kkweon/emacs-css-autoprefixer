@@ -3,11 +3,6 @@
 ;;; Code:
 (load-file "css-autoprefixer.el")
 
-(ert-deftest autoprefixer-remove-first-and-last-line
-    ()
-  "Test if it can get rid of the first and the last line"
-  (should (equal "middleline" (css-autoprefixer--trim-first-and-last "first\nmiddleline\nlastline"))))
-
 (ert-deftest autoprefixer--execute-npx
     ()
   "Test if the autoprefxier works"
