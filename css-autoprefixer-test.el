@@ -8,18 +8,25 @@
   "Test if the autoprefxier works"
   (let ((temp-file "temp.css"))
     (with-temp-file temp-file
-      (insert "a {
-  display: flex;
+      (insert "::placeholder {
+  color: gray;
 }"))
     (let* ((result (css-autoprefixer--execute-npx temp-file))
            (code (car result))
            (content (car (cdr result))))
       (should (equal 0 code))
-      (should (equal "a {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}" (css-autoprefixer--trim-first-and-last content))))
+      (should (equal "::-webkit-input-placeholder {
+  color: gray;
+}
+:-ms-input-placeholder {
+  color: gray;
+}
+::-ms-input-placeholder {
+  color: gray;
+}
+::placeholder {
+  color: gray;
+}" content)))
     (delete-file temp-file)))
 
 (ert-deftest autoprefixer--test-fail
