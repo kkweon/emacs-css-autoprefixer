@@ -5,35 +5,31 @@
 Generates vendor autoprefixes for your CSS files
 
 #+BEGIN_SRC css
-  a {
-    display: flex;
-  }
-
-  p {
-    display: flex;
+  ::placeholder {
+    color: gray;
   }
 #+END_SRC
 
 converted to
 
 #+BEGIN_SRC css
-  a {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+  ::-webkit-input-placeholder {
+    color: gray;
   }
-
-  p {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+  :-ms-input-placeholder {
+    color: gray;
+  }
+  ::-ms-input-placeholder {
+    color: gray;
+  }
+  ::placeholder {
+    color: gray;
   }
 #+END_SRC
 
 
 * Installation
 ** Dependencies
-
 #+BEGIN_SRC bash
 npm install -g npx postcss-cli autoprefixer
 #+END_SRC
