@@ -33,8 +33,9 @@
     ()
   "When the autoprefixer fail, nothing should change"
   (with-temp-buffer
-    (insert "this is wrong css syntax so it wil fail")
+    (insert "this is wrong css syntax so it will fail")
+    (print (buffer-string))
     (css-autoprefixer)
-    (should (equal (buffer-string) "this is wrong css syntax so it wil fail"))))
+    (should (equal (buffer-string) "this is wrong css syntax so it will fail"))))
 
 ;;; css-autoprefixer-test.el ends here
